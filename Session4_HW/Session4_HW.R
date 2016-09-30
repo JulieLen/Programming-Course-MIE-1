@@ -150,6 +150,8 @@ reg <- function(n, Mu, Sig){
   return(beta)
 }
 
+reg(50, c(2.0, 1.0), SIGMA)
+
 # Question : I do not get why when I define the function differently by
 # setting : Y <- data[,1] and X <- data[,2] I get results that are larger 
 # than 1 … Do you have a clue ?
@@ -179,7 +181,6 @@ s
 # Now I will try to write again the function reg using the function : 
 
 reg1 <- function(n, Mu, varmat=function(x) x){
-  x <- runif(1)
   data <- mvrnorm(n, mu = Mu, Sigma = varmat(x))
   Y <- data[,2]
   X <- data[,1]
@@ -187,8 +188,19 @@ reg1 <- function(n, Mu, varmat=function(x) x){
   return(beta)
 }
 
-# It does not work :( I tried to change several things but I did 
-# not success to make the reg1 function work ! 
+reg1(50, c(2.0,1.0), 0.5)
+
+# It does not work :( I tried to change several things in the syntax but I did 
+# not success to make the reg1 function work ! I tried : 
+
+reg11 <- function(n, Mu, varmat=function(x) x){
+  S <- varmat(x)
+  data <- mvrnorm(n, mu = Mu, Sigma = S)
+  Y <- data[,2]
+  X <- data[,1]
+  beta <- solve(t(X) %*% X) %*% t(X) %*% Y
+  return(beta)
+}
 
 # --> 2) with the function reg I have created, I am again not taking 
 # into account the intercept. I am going to take the first reg function
@@ -196,7 +208,7 @@ reg1 <- function(n, Mu, varmat=function(x) x){
 
 one <- c(rep(1, n))
 
-reg <- function(n, Mu, Sig){
+reg2 <- function(n, Mu, Sig){
   data <- mvrnorm(n, mu = Mu, Sigma = Sig)
   Y <- data[,2]
   x <- data[,1]
@@ -205,4 +217,6 @@ reg <- function(n, Mu, Sig){
   return(beta)
 }
 
-# And now that's good !
+reg2(50, c(2.0,1.0), SIGMA)
+
+# Again it works since we obtain a vector for ß !
