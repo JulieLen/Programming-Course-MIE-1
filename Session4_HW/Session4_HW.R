@@ -180,8 +180,15 @@ s
 # Finally, I might get along with functions ! 
 # Now I will try to write again the function reg using the function : 
 
-reg1 <- function(n, Mu, varmat=function(x) x){
-  data <- mvrnorm(n, mu = Mu, Sigma = varmat(x))
+######### comment
+# you need to define x! or beta as above
+# Also, your varmat funciton returns a covariance matrix
+# of dimension 5, which doesn't match your mu
+#reg1 <- function(n, Mu, varmat=function(x) x){
+reg1 <- function(n, Mu, beta=0.1, varmat=function(x) x){
+  #data <- mvrnorm(n, mu = Mu, Sigma = varmat(x))
+  varmat(beta)
+  data <- mvrnorm(n, mu = Mu, Sigma = varmat(beta))
   Y <- data[,2]
   X <- data[,1]
   beta <- solve(t(X) %*% X) %*% t(X) %*% Y
