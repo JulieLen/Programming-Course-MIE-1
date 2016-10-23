@@ -11,3 +11,8 @@ effort into trying different things, which is the best way to learn to code!
 I added some comments on how you might get your solution working and you should
 keep in mind the dimension issue like in class (X <- out[,1] is only one
 column). Keep up the good work!
+
+2016.10.25 - HW5 - Nice work Julie! I especially like that you combined
+             your studying for micro with this project!
+             HW6 - Thanks for submitting something! I hope your tests
+             went well.
